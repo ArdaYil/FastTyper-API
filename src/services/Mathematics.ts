@@ -2,7 +2,7 @@ class Mathematics {
   public static random(min: number, max: number, decimals: number = 0) {
     const number = Math.random() * (max - min) + min;
 
-    return (decimals = 0);
+    return this.removeDecimals(number, decimals);
   }
 
   public static randomNumbers(
@@ -33,3 +33,5 @@ class Mathematics {
     return parseFloat(str.substring(0, dot + decimals + 1));
   }
 }
+
+export default Mathematics;

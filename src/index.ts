@@ -1,8 +1,11 @@
 import express from "express";
 import config from "config";
+import routes from "./startup/routes";
 
 const app = express();
 const port = process.env.PORT || config.get("port");
+
+routes(app);
 
 const server = app.listen(port, () =>
   console.log(

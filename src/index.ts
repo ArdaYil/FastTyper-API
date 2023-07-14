@@ -1,7 +1,8 @@
 import express from "express";
+import config from "config";
 
 const app = express();
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || config.get("port");
 
 const server = app.listen(port, () =>
   console.log(

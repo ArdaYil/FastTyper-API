@@ -6,8 +6,8 @@ import middleware from "./startup/middleware";
 const app = express();
 const port = process.env.PORT || config.get("port");
 
-routes(app);
 middleware(app);
+routes(app);
 
 const server = app.listen(port, () =>
   console.log(

@@ -16,7 +16,7 @@ class Mathematics {
     while (numbers.length < amount) {
       const number = this.random(min, max, decimals);
 
-      if (number in numbers) continue;
+      if (numbers.find((n) => n === number)) continue;
 
       numbers.push(number);
     }

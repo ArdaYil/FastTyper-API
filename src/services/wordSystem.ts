@@ -7,7 +7,7 @@ export const getRandomWords = (amount: number) => {
   const randomNumbers = Mathematics.randomNumbers(0, wordArray.length, amount);
   const words: string[] = [];
 
-  for (let i = 0; i <= amount; i++) {
+  for (let i = 0; i < amount; i++) {
     words[i] = wordArray[randomNumbers[i]];
   }
 

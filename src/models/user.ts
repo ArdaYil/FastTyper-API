@@ -1,5 +1,8 @@
 import typegoose, { modelOptions, prop, Severity } from "@typegoose/typegoose";
+import config from "config";
 import z, { TypeOf } from "zod";
+import ms from "ms";
+import UserShrinked from "../entities/UserShrinked";
 
 const usernameMinLength = 1;
 const usernameMaxLength = 50;
@@ -60,8 +63,8 @@ export type UserInputBody = TypeOf<typeof userSchema>;
 export class User {
   @prop({
     required: true,
-    minlength: 1,
-    maxlength: 50,
+    minlength: usernameMaxLength,
+    maxlength: usernameMaxLength,
     trim: true,
     type: String,
   })
@@ -69,8 +72,8 @@ export class User {
 
   @prop({
     required: true,
-    minlength: 5,
-    maxlength: 100,
+    minlength: emailMinLength,
+    maxlength: emailMaxLength,
     trim: true,
     type: String,
   })
@@ -78,12 +81,102 @@ export class User {
 
   @prop({
     required: true,
-    minlength: 8,
-    maxlength: 1000,
+    minlength: passwordMinLength,
+    maxlength: passwordMaxLength,
     trim: true,
     type: String,
   })
   password: string;
+
+  @prop({
+    required: false,
+    default: 0,
+    min: 0,
+    max: config.get("maxTests"),
+    type: Number,
+  })
+  testTaken: number;
+
+  @prop({
+    required: false,
+    default: 0,
+    min: 0,
+    max: config.get("maxWPM"),
+    type: Number,
+  })
+  highestWPM: number;
+
+  @prop({
+    required: false,
+    default: 0,
+    min: 0,
+    max: config.get("maxAverageWPM"),
+    type: Number,
+  })
+  averageWPM: number;
+
+  @prop({
+    required: false,
+    default: [],
+    type: Array<typeof Number>,
+    validate: {
+      validator: (value: Array<number>) =>
+        value.length <= config.get<number>("maxPreviousTests"),
+      message: `Amount of previous tests cannot exceed ${config.get(
+        "maxPreviousTests"
+      )}`,
+    },
+  })
+  previousTests: Array<number>;
+
+  @prop({
+    required: false,
+    defualt: [],
+    type: Array<typeof Number>,
+    validate: {
+      validator: (value: Array<number>) =>
+        value.length <= config.get<number>("maxAchievements"),
+      message: `Achievements cannot exceed ${config.get("maxAchievements")}`,
+    },
+  })
+  achievements: Array<number>;
+
+  @prop({ required: false, default: 0, min: 0, max: ms("1y"), type: Number })
+  timePracticed: number;
+
+  @prop({
+    requried: false,
+    default: "",
+    minlength: 7,
+    maxlength: 15,
+    type: String,
+  })
+  userTag: string;
+
+  @prop({
+    required: false,
+    default: [],
+    type: Array<UserShrinked>,
+    validate: {
+      validator: (value: Array<UserShrinked>) =>
+        value.length < config.get<number>("maxFriends"),
+      message: `A user cannot have more than ${config.get(
+        "maxFriends"
+      )} friends`,
+    },
+  })
+  friends: Array<UserShrinked>;
+
+  @prop({
+    required: false,
+    default: [],
+    type: Array<typeof String>,
+    validate: {
+      validator: (value: Array<typeof String>) =>
+        value.length < config.get<number>("maxTournaments"),
+    },
+  })
+  tournaments: Array<string>;
 }
 
 const UserModel = typegoose.getModelForClass(User);

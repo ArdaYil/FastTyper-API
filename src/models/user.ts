@@ -75,6 +75,7 @@ export class User {
     minlength: emailMinLength,
     maxlength: emailMaxLength,
     trim: true,
+    unique: true,
     type: String,
   })
   email: string;
@@ -149,6 +150,7 @@ export class User {
     default: "",
     minlength: 7,
     maxlength: 15,
+    unique: true,
     type: String,
   })
   userTag: string;

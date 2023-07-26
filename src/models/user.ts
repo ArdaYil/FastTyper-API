@@ -82,7 +82,7 @@ export class User {
   @prop({
     required: true,
     minlength: passwordMinLength,
-    maxlength: passwordMaxLength,
+    maxlength: passwordHashMaxLength,
     trim: true,
     type: String,
   })

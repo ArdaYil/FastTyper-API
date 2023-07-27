@@ -8,8 +8,13 @@ import config from "config";
 import z, { TypeOf } from "zod";
 import ms from "ms";
 import argon2 from "argon2";
+import jwt from "jsonwebtoken";
 import UserShrinked from "../entities/UserShrinked";
 import generateTag from "../services/TagSystem";
+import _ from "lodash";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const usernameMinLength = 1;
 const usernameMaxLength = 50;
@@ -59,6 +64,21 @@ const userSchema = z
 
 export type UserInputBody = TypeOf<typeof userSchema>;
 
+const getUserDataForClient = (user: User) =>
+  _.pick(user, [
+    "username",
+    "email",
+    "testsTaken",
+    "highestWPM",
+    "averageWPM",
+    "previousTests",
+    "achievements",
+    "timePracticed",
+    "userTag",
+    "friends",
+    "tournaments",
+  ]);
+
 @pre<User>("save", async function () {
   const hashPassword = async () => {
     if (!this.isModified("password")) return;
@@ -68,13 +88,14 @@ export type UserInputBody = TypeOf<typeof userSchema>;
     this.password = hash;
   };
 
-  const getTag = async () => {
+  const setTag = async () => {
     const tag = await generateTag();
 
     this.userTag = tag;
   };
 
   await hashPassword();
+  await setTag();
 
   return;
 })
@@ -122,7 +143,7 @@ export class User {
     max: config.get("maxTests"),
     type: Number,
   })
-  testTaken: number;
+  testsTaken: number;
 
   @prop({
     required: false,
@@ -205,6 +226,21 @@ export class User {
     },
   })
   tournaments: Array<string>;
+
+  public generateAccessToken() {
+    return jwt.sign(
+      getUserDataForClient(this),
+      process.env.JWT_ACCESS_KEY || "",
+      { expiresIn: ms("15m") }
+    );
+  }
+
+  public generateRefreshToken() {
+    return jwt.sign(
+      getUserDataForClient(this),
+      process.env.JWT_REFRESH_KEY || ""
+    );
+  }
 }
 
 const UserModel = typegoose.getModelForClass(User);

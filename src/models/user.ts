@@ -1,8 +1,15 @@
-import typegoose, { modelOptions, prop, Severity } from "@typegoose/typegoose";
+import typegoose, {
+  modelOptions,
+  pre,
+  prop,
+  Severity,
+} from "@typegoose/typegoose";
 import config from "config";
 import z, { TypeOf } from "zod";
 import ms from "ms";
+import argon2 from "argon2";
 import UserShrinked from "../entities/UserShrinked";
+import generateTag from "../services/TagSystem";
 
 const usernameMinLength = 1;
 const usernameMaxLength = 50;
@@ -52,6 +59,25 @@ const userSchema = z
 
 export type UserInputBody = TypeOf<typeof userSchema>;
 
+@pre<User>("save", async function () {
+  const hashPassword = async () => {
+    if (!this.isModified("password")) return;
+
+    const hash = await argon2.hash(this.password);
+
+    this.password = hash;
+  };
+
+  const getTag = async () => {
+    const tag = await generateTag();
+
+    this.userTag = tag;
+  };
+
+  await hashPassword();
+
+  return;
+})
 @modelOptions({
   schemaOptions: {
     timestamps: true,

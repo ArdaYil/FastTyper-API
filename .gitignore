@@ -1,6 +1,5 @@
 node_modules
 dist/
 .vs-code
-test
 coverage/
 .env

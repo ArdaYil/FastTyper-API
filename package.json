@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --coverage --verbose --forceExit --maxWorkers=1",
+    "multi-test": "npm run test && npm run test && npm run test npm run test && npm run test && npm run test",
     "start": "nodemon src/index.ts"
   },
   "keywords": [],

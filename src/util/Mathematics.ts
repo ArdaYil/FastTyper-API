@@ -33,12 +33,9 @@ class Mathematics {
   }
 
   public static removeDecimals(num: number, decimals: number) {
-    if (decimals == 0) return Math.floor(num);
+    const factor = 10 ** decimals;
 
-    const str = num.toString();
-    const dot = str.indexOf(".");
-
-    return parseFloat(str.substring(0, dot + decimals + 1));
+    return Math.trunc(num * factor) / factor;
   }
 
   public static amountOfDecimals(num: number) {

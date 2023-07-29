@@ -11,3 +11,5 @@ class Arrays {
     return false;
   }
 }
+
+export default Arrays;

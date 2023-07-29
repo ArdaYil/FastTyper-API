@@ -1,4 +1,5 @@
 import Mathematics from "../../src/util/Mathematics";
+import Arrays from "../../src/util/Arrays";
 
 type CompareType = "EXACT" | "RANGE";
 
@@ -9,20 +10,6 @@ const amountOfDecimals = (num: number) => {
   if (dot === -1) return 0;
 
   return str.substring(dot + 1, str.length).length;
-};
-
-const hasDuplicates = (array: Array<any>) => {
-  const foundValues = new Map();
-
-  for (let value in array) {
-    const valueExists = foundValues.get(value);
-
-    if (valueExists) return true;
-
-    foundValues.set(value, true);
-  }
-
-  return false;
 };
 
 describe("Mathematics.random() tests", () => {
@@ -66,7 +53,7 @@ describe("Mathematics.randomNumbers() tests", () => {
         const randomNumbers = Mathematics.randomNumbers(min, max, amount);
 
         expect(randomNumbers.length).toBe(amount);
-        expect(hasDuplicates(randomNumbers)).toBe(false);
+        expect(Arrays.hasDuplicates(randomNumbers)).toBe(false);
       }
     }
   );

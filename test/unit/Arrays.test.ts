@@ -19,3 +19,15 @@ describe("Arrays.hasDuplicates() tests", () => {
     expect(Arrays.hasDuplicates(array)).toBe(result);
   });
 });
+
+describe("Arrays.amountOfDuplicates() tests", () => {
+  test.each([
+    [[1, 2, 5, 5, 6, 7, 8, 8, 55], 2],
+    [[1, 4, 1, 6, 1, 9, -4], 1],
+    [[], 0],
+    [[5, 3, 6, 2, 6, 2, 6, 2, 7, 3], 3],
+    [["a", "g", "h", "j", "a", "j", "g"], 3],
+  ])("Arrays.amountOfDuplicates(%i) should return %i", (array, duplicates) => {
+    expect(Arrays.amountOfDuplicates(array)).toBe(duplicates);
+  });
+});

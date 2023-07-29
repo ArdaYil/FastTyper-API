@@ -12,14 +12,16 @@ class Arrays {
   }
 
   public static amountOfDuplicates(array: Array<unknown>) {
-    const values = new Map<unknown, boolean>();
+    const values = new Map<unknown, number>();
     let duplicates = 0;
 
     for (let value of array) {
-      if (values.get(value)) duplicates++;
-
-      values.set(value, true);
+      values.set(value, Math.min((values.get(value) || 0) + 1, 2));
     }
+
+    values.forEach((value) => {
+      if (value === 2) duplicates += 1;
+    });
 
     return duplicates;
   }

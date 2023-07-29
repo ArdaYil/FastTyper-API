@@ -1,8 +1,6 @@
 import Mathematics from "../../src/util/Mathematics";
 import Arrays from "../../src/util/Arrays";
 
-type CompareType = "EXACT" | "RANGE";
-
 describe("Mathematics.random() tests", () => {
   test.each([
     [324, 340, 0],

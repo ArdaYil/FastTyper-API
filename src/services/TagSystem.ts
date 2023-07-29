@@ -1,58 +1,14 @@
 import Mathematics from "../util/Mathematics";
 import TagModel from "../models/tag";
+import Strings from "../util/Strings";
 
 const charactersPerTag = 7;
-
-const characters = [
-  "A",
-  "B",
-  "C",
-  "D",
-  "E",
-  "F",
-  "G",
-  "H",
-  "I",
-  "J",
-  "K",
-  "L",
-  "M",
-  "N",
-  "O",
-  "P",
-  "Q",
-  "R",
-  "S",
-  "T",
-  "U",
-  "V",
-  "W",
-  "X",
-  "Y",
-  "Z",
-];
-
-const randomCharacter = () => {
-  const randomNumber = Mathematics.random(1, characters.length - 1);
-
-  return characters[randomNumber];
-};
-
-const generateTag = () => {
-  let tag = "";
-
-  for (let i = 0; i < charactersPerTag; i++) {
-    tag += randomCharacter();
-  }
-
-  return tag;
-};
 
 const generateUniqueTag = async () => {
   const attempts = 20;
 
   for (let i = 0; i < attempts; i++) {
-    const tag = generateTag();
+    const tag = Strings.getRandomString(charactersPerTag);
 
     if (await isTagUnique(tag)) {
       const tagDocument = new TagModel({ value: tag });

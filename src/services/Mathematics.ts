@@ -11,6 +11,14 @@ class Mathematics {
     amount: number,
     decimals: number = 0
   ) {
+    if (amount <= 0)
+      throw new Error("Amount must be a positive intiger and cannot be 0");
+
+    if (amount > Math.max(max, min) - Math.min(max, min))
+      throw new Error(
+        "Amount cannot be greater than max - min. Otherwise each value in the returned array cannot be unique"
+      );
+
     const numbers: number[] = [];
 
     while (numbers.length < amount) {

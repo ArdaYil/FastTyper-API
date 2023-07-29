@@ -2,13 +2,27 @@ import Mathematics from "../../src/services/Mathematics";
 
 type CompareType = "EXACT" | "RANGE";
 
-const getDecimals = (num: number) => {
+const amountOfDecimals = (num: number) => {
   const str = num.toString();
   const dot = str.indexOf(".");
 
   if (dot === -1) return 0;
 
   return str.substring(dot + 1, str.length).length;
+};
+
+const hasDuplicates = (array: Array<any>) => {
+  const foundValues = new Map();
+
+  for (let value in array) {
+    const valueExists = foundValues.get(value);
+
+    if (valueExists) return true;
+
+    foundValues.set(value, true);
+  }
+
+  return false;
 };
 
 describe("Mathematics.random() tests", () => {
@@ -34,9 +48,52 @@ describe("Mathematics.random() tests", () => {
       expect(randomNumber).toBeLessThanOrEqual(actualMax);
 
       if (decimalTruthiness === false)
-        return expect(getDecimals(randomNumber)).not.toBe(decimals);
+        return expect(amountOfDecimals(randomNumber)).not.toBe(decimals);
 
-      expect(getDecimals(randomNumber)).toBe(decimals);
+      expect(amountOfDecimals(randomNumber)).toBe(decimals);
+    }
+  );
+});
+
+describe("Mathematics.randomNumbers() tests", () => {
+  test.each([
+    [100, 200, 80],
+    [50, 100, 50],
+  ])(
+    "Mathematics.randomNumbers(%i, %i, %i) should return an array with random numbers within range, without duplicates",
+    (min, max, amount) => {
+      for (let i = 0; i < 20; i++) {
+        const randomNumbers = Mathematics.randomNumbers(min, max, amount);
+
+        expect(randomNumbers.length).toBe(amount);
+        expect(hasDuplicates(randomNumbers)).toBe(false);
+      }
+    }
+  );
+
+  it("should not throw an error", () => {
+    expect(() => Mathematics.randomNumbers(10, 20, 10)).not.toThrow();
+  });
+
+  test.each([
+    [30, 40, 11],
+    [50, 80, 35],
+    [80, 30, 51],
+    [-30, -50, 21],
+  ])(
+    "Mathematics.randomNumbers(%i, %i, %i) should throw an error if amount is greater than max - min",
+    (min, max, amount) => {
+      expect(() => Mathematics.randomNumbers(min, max, amount)).toThrow();
+    }
+  );
+
+  test.each([
+    [10, 20, 0],
+    [-10, -20, -5],
+  ])(
+    "Mathematics.randomNumbers(%i, %i, %i) should throw if i is less than or equal to 0",
+    (min, max, amount) => {
+      expect(() => Mathematics.randomNumbers(min, max, amount)).toThrow();
     }
   );
 });

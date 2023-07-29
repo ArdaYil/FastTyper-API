@@ -1,4 +1,4 @@
-import Mathematics from "../../src/services/Mathematics";
+import Mathematics from "../../src/util/Mathematics";
 
 type CompareType = "EXACT" | "RANGE";
 

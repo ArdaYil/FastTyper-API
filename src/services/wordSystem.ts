@@ -1,5 +1,5 @@
 import fs from "fs";
-import Mathematics from "./Mathematics";
+import Mathematics from "../util/Mathematics";
 
 const wordArray = fs.readFileSync("data/words.txt", "utf-8").split("\n");
 

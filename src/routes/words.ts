@@ -1,6 +1,6 @@
 import config from "config";
 import { Router } from "express";
-import { getRandomWords } from "../services/wordSystem";
+import { getRandomWords } from "../services/WordSystem";
 
 const router = Router();
 

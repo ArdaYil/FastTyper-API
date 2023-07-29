@@ -1,4 +1,4 @@
-import Mathematics from "./Mathematics";
+import Mathematics from "../util/Mathematics";
 import TagModel from "../models/tag";
 
 const charactersPerTag = 7;

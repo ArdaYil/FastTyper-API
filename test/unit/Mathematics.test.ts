@@ -30,7 +30,9 @@ describe("Mathematics.random() tests", () => {
           decimals
         );
 
-      expect(Mathematics.amountOfDecimals(randomNumber)).toBe(decimals);
+      expect(Mathematics.amountOfDecimals(randomNumber)).toBeLessThanOrEqual(
+        decimals
+      );
     }
   );
 });
@@ -76,4 +78,29 @@ describe("Mathematics.randomNumbers() tests", () => {
       expect(() => Mathematics.randomNumbers(min, max, amount)).toThrow();
     }
   );
+});
+
+describe("Mathematics.removeDecimals() tests", () => {
+  test.each([
+    [3.53323, 3, 3.533],
+    [0.55687, 2, 0.55],
+    [-5.807236, 3, -5.807],
+    [-8.0032, 2, -8],
+    [10.967492977574, 10, 10.9674929775],
+    [6, 9, 6],
+    [10.86746, 10, 10.86746],
+    [6.7462, 4, 6.7462],
+    [3.8674, 0, 3],
+  ])(
+    "Mathematics.removeDecimals(%i, %i) should return %i",
+    (number, decimals, result) => {
+      const actualResult = Mathematics.removeDecimals(number, decimals);
+
+      expect(actualResult).toBe(result);
+    }
+  );
+
+  it("should throw an exception if decimals (third parameter) is less than 0", () => {
+    expect(() => Mathematics.removeDecimals(5.243, -1)).toThrow();
+  });
 });

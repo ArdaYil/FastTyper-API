@@ -33,6 +33,11 @@ class Mathematics {
   }
 
   public static removeDecimals(num: number, decimals: number) {
+    if (decimals < 0)
+      throw new Error(
+        "Third positional argument (decimals) cannot be less than 0"
+      );
+
     const factor = 10 ** decimals;
 
     return Math.trunc(num * factor) / factor;

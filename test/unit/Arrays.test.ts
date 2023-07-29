@@ -10,9 +10,12 @@ describe("Arrays.hasDuplicates() tests", () => {
     [[-8, 3, 832, 9, 8, -8], true],
     [["f", "b", "h", "oj", "h"], true],
     [["a", "b", "c", "f"], false],
-    [[], false],
+    [[true, false], false],
+    [[true, true], true],
+    [[true, true], true],
+    [[user1, user2, user3], false],
+    [[user1, user2, user3, user1], true],
   ])("Arrays.hasDuplicates(%i) should return %i", (array, result) => {
-    console.log(array, result);
     expect(Arrays.hasDuplicates(array)).toBe(result);
   });
 });

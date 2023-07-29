@@ -3,4 +3,4 @@ dist/
 .vs-code
 coverage/
 .env
-TagSystem.test.ts
+Strings.test.ts

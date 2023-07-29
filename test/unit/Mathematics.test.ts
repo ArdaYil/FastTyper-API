@@ -104,3 +104,22 @@ describe("Mathematics.removeDecimals() tests", () => {
     expect(() => Mathematics.removeDecimals(5.243, -1)).toThrow();
   });
 });
+
+describe("Mathematics.amountOfDecimals() tests", () => {
+  test.each([
+    [3.094726, 6],
+    [-4.8573659863, 10],
+    [0.00984, 5],
+    [-0.031, 3],
+    [0.0, 0],
+    [0.2, 1],
+    [-0.024, 3],
+  ])(
+    "Mathematics.amountOfDecimals(%i) should return %i",
+    (number, decimals) => {
+      const amount = Mathematics.amountOfDecimals(number);
+
+      expect(amount).toBe(decimals);
+    }
+  );
+});

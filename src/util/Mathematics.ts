@@ -40,6 +40,15 @@ class Mathematics {
 
     return parseFloat(str.substring(0, dot + decimals + 1));
   }
+
+  public static amountOfDecimals(num: number) {
+    const str = num.toString();
+    const dot = str.indexOf(".");
+
+    if (dot === -1) return 0;
+
+    return str.length - dot - 1;
+  }
 }
 
 export default Mathematics;

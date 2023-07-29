@@ -3,15 +3,6 @@ import Arrays from "../../src/util/Arrays";
 
 type CompareType = "EXACT" | "RANGE";
 
-const amountOfDecimals = (num: number) => {
-  const str = num.toString();
-  const dot = str.indexOf(".");
-
-  if (dot === -1) return 0;
-
-  return str.substring(dot + 1, str.length).length;
-};
-
 describe("Mathematics.random() tests", () => {
   test.each([
     [324, 340, 0],
@@ -35,9 +26,11 @@ describe("Mathematics.random() tests", () => {
       expect(randomNumber).toBeLessThanOrEqual(actualMax);
 
       if (decimalTruthiness === false)
-        return expect(amountOfDecimals(randomNumber)).not.toBe(decimals);
+        return expect(Mathematics.amountOfDecimals(randomNumber)).not.toBe(
+          decimals
+        );
 
-      expect(amountOfDecimals(randomNumber)).toBe(decimals);
+      expect(Mathematics.amountOfDecimals(randomNumber)).toBe(decimals);
     }
   );
 });

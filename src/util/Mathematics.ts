@@ -1,8 +1,8 @@
 class Mathematics {
   public static random(min: number, max: number, decimals: number = 0) {
-    const number = Math.random() * (max - min) + min;
+    const number = Math.random() * (max + 1 - min) + min;
 
-    return this.removeDecimals(number, decimals);
+    return Math.min(this.removeDecimals(number, decimals), max);
   }
 
   public static randomNumbers(

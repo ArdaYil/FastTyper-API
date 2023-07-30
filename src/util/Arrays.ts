@@ -13,23 +13,20 @@ class Arrays {
 
   public static amountOfDuplicates(
     array: Array<unknown>,
-    caseSensitive = false
+    caseSensitive = true
   ) {
     const values = new Map<unknown, number>();
     let duplicates = 0;
 
     const getValue = (value: unknown) =>
-      caseSensitive && typeof value === "string" ? value.toLowerCase() : value;
+      !caseSensitive && typeof value === "string" ? value.toLowerCase() : value;
 
     for (let value of array) {
-      values.set(
-        getValue(value),
-        Math.min((values.get(getValue(value)) || 0) + 1, 2)
-      );
+      values.set(getValue(value), (values.get(getValue(value)) || 0) + 1);
     }
 
     values.forEach((value) => {
-      if (value === 2) duplicates += 1;
+      if (value >= 2) duplicates += value;
     });
 
     return duplicates;

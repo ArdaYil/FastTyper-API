@@ -30,7 +30,7 @@ const characters = [
   "Z",
 ];
 
-type CharCase = "UPPER" | "LOWER" | "RANDOM";
+export type CharCase = "UPPER" | "LOWER" | "RANDOM";
 
 class Strings {
   private static getRandomCaseFunc() {

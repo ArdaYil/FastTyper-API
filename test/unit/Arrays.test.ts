@@ -27,17 +27,15 @@ describe("Arrays.amountOfDuplicates() tests", () => {
     [[], 0],
     [[5, 3, 6, 2, 6, 2, 6, 2, 7, 3], 3],
     [["a", "g", "h", "j", "a", "j", "g"], 3],
+    [[user1, user1, user2, user2, user3], 2],
+    [[user1, user2, user3], 0],
   ])("Arrays.amountOfDuplicates(%i) should return %i", (array, duplicates) => {
     expect(Arrays.amountOfDuplicates(array)).toBe(duplicates);
   });
   test.each([
-    [[1, 2, 5, 5, 6, 7, 8, 8, 55], undefined, 2],
-    [[1, 4, 1, 6, 1, 9, -4], undefined, 1],
     [["f", "F", "a", "f", "A", "j", "j", "g"], true, 3],
     [["f", "F", "a", "f", "A", "j", "j", "g"], false, 2],
     [["h", "u", "H", "k", "U", "j", "G", "g", "h"], undefined, 1],
-    [[user1, user1, user2, user2, user3], undefined, 2],
-    [[user1, user2, user3], undefined, 0],
   ])(
     "Arrays.amountOfDuplicates(%i) should return %i",
     (array, caseSensitive, duplicates) => {

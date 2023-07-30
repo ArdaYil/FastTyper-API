@@ -57,6 +57,18 @@ describe("Arrays.mostRepeatedCharacter() tests", () => {
       expect(Arrays.mostRepeatedCharacter(array)).toBe(result);
     }
   );
+
+  test.each([
+    [["J", "f", "b", "f", "f", "b"], true, 3],
+    [["K", "K", "k", "k", "K", "j", "j", "K"], false, 6],
+    [["z", "b", "e", "F", "H", "Z", "Z"], false, 3],
+    [["g", "V", "v", "V", "V"], false, 4],
+  ])(
+    "Arrays.amountOfLowercaseCharacters(%i, %i) should return %i",
+    (array, caseSensitive, result) => {
+      expect(Arrays.mostRepeatedCharacter(array, caseSensitive)).toBe(result);
+    }
+  );
 });
 
 describe("Arrays.amountOfLowercaseCharacters() tests", () => {

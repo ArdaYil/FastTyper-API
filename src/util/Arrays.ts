@@ -29,8 +29,6 @@ class Arrays {
       if (value >= 2) duplicates += value;
     });
 
-    console.log(values);
-
     return duplicates;
   }
 
@@ -43,7 +41,7 @@ class Arrays {
     const getKey = (key: string) => (caseSensitive ? key : key.toLowerCase());
 
     array.forEach(
-      (char) => (characters[getKey(char)] = characters[getKey(char)] + 1)
+      (char) => (characters[getKey(char)] = (characters[getKey(char)] || 0) + 1)
     );
 
     return Object.values(characters).reduce((a, b) => (b > a ? b : a), 0);

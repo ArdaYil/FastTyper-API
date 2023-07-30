@@ -45,6 +45,20 @@ describe("Arrays.amountOfDuplicates() tests", () => {
   );
 });
 
+describe("Arrays.mostRepeatedCharacter() tests", () => {
+  test.each([
+    [["J", "f", "b", "f", "f", "b"], 3],
+    [["K", "K", "k", "k", "K", "j", "j", "K"], 4],
+    [["z", "b", "e", "F", "H", "Z", "Z"], 2],
+    [["g", "V", "v", "V", "V"], 3],
+  ])(
+    "Arrays.amountOfLowercaseCharacters(%i) should return %i",
+    (array, result) => {
+      expect(Arrays.mostRepeatedCharacter(array)).toBe(result);
+    }
+  );
+});
+
 describe("Arrays.amountOfLowercaseCharacters() tests", () => {
   test.each([
     [["f", "H", "g", "k", "j", "K", "G", "V"], 4],

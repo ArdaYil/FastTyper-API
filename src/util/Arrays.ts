@@ -11,12 +11,21 @@ class Arrays {
     return false;
   }
 
-  public static amountOfDuplicates(array: Array<unknown>) {
+  public static amountOfDuplicates(
+    array: Array<unknown>,
+    caseSensitive = false
+  ) {
     const values = new Map<unknown, number>();
     let duplicates = 0;
 
+    const getValue = (value: unknown) =>
+      caseSensitive && typeof value === "string" ? value.toLowerCase() : value;
+
     for (let value of array) {
-      values.set(value, Math.min((values.get(value) || 0) + 1, 2));
+      values.set(
+        getValue(value),
+        Math.min((values.get(getValue(value)) || 0) + 1, 2)
+      );
     }
 
     values.forEach((value) => {

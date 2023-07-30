@@ -3,4 +3,3 @@ dist/
 .vs-code
 coverage/
 .env
-Strings.test.ts

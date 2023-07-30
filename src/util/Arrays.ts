@@ -34,6 +34,14 @@ class Arrays {
     return duplicates;
   }
 
+  public static mostRepeatedCharacter(array: Array<string>) {
+    const characters: { [key: string]: number } = {};
+
+    array.forEach((char) => (characters[char] = characters[char] + 1));
+
+    return Object.values(characters).reduce((a, b) => (b > a ? b : a), 0);
+  }
+
   public static amountOfLowercaseCharacters(array: Array<string>) {
     return array.reduce(
       (amount, char) => (char === char.toLowerCase() ? amount + 1 : amount),

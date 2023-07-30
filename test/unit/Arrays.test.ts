@@ -1,10 +1,10 @@
 import Arrays from "../../src/util/Arrays";
 
-describe("Arrays.hasDuplicates() tests", () => {
-  const user1 = { name: "john", age: 30 };
-  const user2 = { name: "andy", age: 40 };
-  const user3 = { name: "emily", age: 50 };
+const user1 = { name: "john", age: 30 };
+const user2 = { name: "andy", age: 40 };
+const user3 = { name: "emily", age: 50 };
 
+describe("Arrays.hasDuplicates() tests", () => {
   test.each([
     [[3, 4, 10, 8], false],
     [[-8, 3, 832, 9, 8, -8], true],
@@ -30,4 +30,18 @@ describe("Arrays.amountOfDuplicates() tests", () => {
   ])("Arrays.amountOfDuplicates(%i) should return %i", (array, duplicates) => {
     expect(Arrays.amountOfDuplicates(array)).toBe(duplicates);
   });
+  test.each([
+    [[1, 2, 5, 5, 6, 7, 8, 8, 55], undefined, 2],
+    [[1, 4, 1, 6, 1, 9, -4], undefined, 1],
+    [["f", "F", "a", "f", "A", "j", "j", "g"], true, 3],
+    [["f", "F", "a", "f", "A", "j", "j", "g"], false, 2],
+    [["h", "u", "H", "k", "U", "j", "G", "g", "h"], undefined, 1],
+    [[user1, user1, user2, user2, user3], undefined, 2],
+    [[user1, user2, user3], undefined, 0],
+  ])(
+    "Arrays.amountOfDuplicates(%i) should return %i",
+    (array, caseSensitive, duplicates) => {
+      expect(Arrays.amountOfDuplicates(array, caseSensitive)).toBe(duplicates);
+    }
+  );
 });

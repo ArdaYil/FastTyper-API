@@ -58,3 +58,17 @@ describe("Arrays.amountOfLowercaseCharacters() tests", () => {
     }
   );
 });
+
+describe("Arrays.amountOfUppercaseCharacters() tests", () => {
+  test.each([
+    [["F", "H", "g", "k", "j", "K", "G", "V"], 5],
+    [["j", "i", "K", "F", "V", "j"], 3],
+    [["j", "i", "u", "v", "V", "j", "K", "I"], 3],
+    [["K", "H", "J", "V", "I"], 5],
+  ])(
+    "Arrays.amountOfLowercaseCharacters(%i) should return %i",
+    (array, result) => {
+      expect(Arrays.amountOfUppercaseCharacters(array)).toBe(result);
+    }
+  );
+});

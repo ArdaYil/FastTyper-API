@@ -34,10 +34,17 @@ class Arrays {
     return duplicates;
   }
 
-  public static mostRepeatedCharacter(array: Array<string>) {
+  public static mostRepeatedCharacter(
+    array: Array<string>,
+    caseSensitive = true
+  ) {
     const characters: { [key: string]: number } = {};
 
-    array.forEach((char) => (characters[char] = characters[char] + 1));
+    const getKey = (key: string) => (caseSensitive ? key : key.toLowerCase());
+
+    array.forEach(
+      (char) => (characters[getKey(char)] = characters[getKey(char)] + 1)
+    );
 
     return Object.values(characters).reduce((a, b) => (b > a ? b : a), 0);
   }

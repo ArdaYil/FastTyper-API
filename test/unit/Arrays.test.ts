@@ -44,3 +44,17 @@ describe("Arrays.amountOfDuplicates() tests", () => {
     }
   );
 });
+
+describe("Arrays.amountOfLowercaseCharacters() tests", () => {
+  test.each([
+    [["f", "H", "g", "k", "j", "K", "G", "V"], 4],
+    [["j", "i", "K", "F", "V", "j"], 3],
+    [["j", "i", "u", "v", "V", "j", "K", "I"], 5],
+    [["K", "H", "J", "V", "I"], 0],
+  ])(
+    "Arrays.amountOfLowercaseCharacters(%i) should return %i",
+    (array, result) => {
+      expect(Arrays.amountOfLowercaseCharacters(array)).toBe(result);
+    }
+  );
+});

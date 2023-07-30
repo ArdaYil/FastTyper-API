@@ -29,7 +29,20 @@ class Arrays {
       if (value >= 2) duplicates += value;
     });
 
+    console.log(values);
+
     return duplicates;
+  }
+
+  public static amountOfLowercaseCharacters(array: Array<string>) {
+    return array.reduce(
+      (amount, char) => (char === char.toLowerCase() ? amount + 1 : amount),
+      0
+    );
+  }
+
+  public static amountOfUppercaseCharacters(array: Array<string>) {
+    return array.length - this.amountOfLowercaseCharacters(array);
   }
 }
 

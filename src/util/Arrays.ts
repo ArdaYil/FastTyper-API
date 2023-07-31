@@ -90,8 +90,8 @@ class Arrays {
       const array = arrays[i];
       const nextArray = arrays[i + 1];
 
-      if (!nextArray) return false;
-      if (this.arrayEquality(array, nextArray)) return false;
+      if (!nextArray) return true;
+      if (!this.arrayEquality(array, nextArray)) return false;
     }
 
     return true;

@@ -140,3 +140,58 @@ describe("Arrays.arrayEquality() unit tests", () => {
     }
   );
 });
+
+describe("Arrays.arraysEquality() unit tests", () => {
+  test.each([
+    [true, [1, 2, 5], [1, 2, 5], [1, 2, 5]],
+    [false, [1, 2, 5], [1, 2], [1, 2]],
+    [false, [1, 2, 5], [1, 2, 5], [1, 3, 5]],
+    [false, ["h", "j", "h"], ["u", "v", "c"], ["u", "v", "c"], ["h", "j", "h"]],
+    [
+      true,
+      ["h", "j", "h"],
+      ["h", "j", "h"],
+      ["h", "j", "h"],
+      ["h", "j", "h"],
+      ["h", "j", "h"],
+    ],
+    [false, ["h", "j", "h"], ["h", "j", "H"], ["h", "j", "h"], ["h", "j", "h"]],
+    [
+      true,
+      [false, false, true, false],
+      [false, false, true, false],
+      [false, false, true, false],
+      [false, false, true, false],
+    ],
+    [
+      false,
+      [false, false, true, false],
+      [false, false, true, true],
+      [false, false, true, false],
+    ],
+    [true, [user1, user1, user2, user3]],
+    [false, [user1, user1, user2, user3], [user1, user1, user3, user3]],
+    [true, [item1, item2, item3], [item1, item2, item3], [item1, item2, item3]],
+    [
+      false,
+      [item1, item2, item3],
+      [item1, item3, item3],
+      [item1, item3, item3],
+    ],
+    [
+      true,
+      [item1, item2, item3],
+      [item1, item2Copy, item3],
+      [item1, item2Copy, item3],
+      [item1, item2Copy, item3],
+      [item1, item2Copy, item3],
+    ],
+  ])(
+    "%i should be returned from Arrays.arraysEquality(%i)",
+    (result, ...args) => {
+      expect(Arrays.arraysEquality(...(args as Array<Array<unknown>>))).toBe(
+        result
+      );
+    }
+  );
+});

@@ -57,6 +57,31 @@ class Arrays {
   public static amountOfUppercaseCharacters(array: Array<string>) {
     return array.length - this.amountOfLowercaseCharacters(array);
   }
+
+  public static arrayEquality = (
+    first: Array<unknown>,
+    second: Array<unknown>
+  ) => {
+    if (first.length !== second.length) return false;
+
+    for (let i = 0; i < first.length; i++) {
+      const firstValue = first[i];
+      const secondValue = second[i];
+      const areObjects =
+        typeof firstValue === "object" && typeof secondValue === "object";
+
+      if (
+        areObjects &&
+        (firstValue as any)?.equals &&
+        !(firstValue as any).equals(secondValue)
+      )
+        return false;
+
+      if (!areObjects && firstValue !== secondValue) return false;
+    }
+
+    return true;
+  };
 }
 
 export default Arrays;

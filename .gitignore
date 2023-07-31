@@ -3,3 +3,4 @@ dist/
 .vs-code
 coverage/
 .env
+WordSystem.test.ts

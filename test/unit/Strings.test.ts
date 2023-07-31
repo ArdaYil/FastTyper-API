@@ -32,3 +32,20 @@ describe("getRandomCharacter", () => {
     }
   });
 });
+
+describe("Strings.getRandomString()", () => {
+  test.each([[undefined, "UPPER", "LOWER", "RANDOM"]])(
+    "Strings.getRandomString(%i) should return a random string with correct case",
+    (charCase) => {
+      const results = [];
+      const amountOfStrings = 10;
+      const length = 5;
+
+      for (let i = 0; i < amountOfStrings; i++) {
+        results[i] = Strings.getRandomString(length, charCase);
+      }
+
+      expect(Arrays.hasDuplicates(results)).toBe(false);
+    }
+  );
+});

@@ -70,14 +70,17 @@ class Arrays {
       const areObjects =
         typeof firstValue === "object" && typeof secondValue === "object";
 
+      const hasEqualMethod = (firstValue as any)?.equals;
+
       if (
         areObjects &&
-        (firstValue as any)?.equals &&
+        hasEqualMethod &&
         !(firstValue as any).equals(secondValue)
       )
         return false;
 
-      if (!areObjects && firstValue !== secondValue) return false;
+      if (!areObjects && !hasEqualMethod && firstValue !== secondValue)
+        return false;
     }
 
     return true;

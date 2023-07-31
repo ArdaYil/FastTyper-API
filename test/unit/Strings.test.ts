@@ -27,7 +27,7 @@ describe("getRandomCharacter", () => {
 
     if (notCaseSensitive) {
       const lowercase = Arrays.amountOfLowercaseCharacters(characters);
-      console.log(characters);
+
       expect(lowercase).not.toBeGreaterThan(charactersToRetrieve * 0.8);
     }
   });

@@ -84,6 +84,18 @@ class Arrays {
 
     return true;
   };
+
+  public static arraysEquality(...arrays: Array<Array<unknown>>) {
+    for (let i = 0; i < arrays.length; i++) {
+      const array = arrays[i];
+      const nextArray = arrays[i + 1];
+
+      if (!nextArray) return false;
+      if (this.arrayEquality(array, nextArray)) return false;
+    }
+
+    return true;
+  }
 }
 
 export default Arrays;

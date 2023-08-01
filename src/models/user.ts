@@ -227,6 +227,24 @@ export class User {
   })
   tournaments: Array<string>;
 
+  @prop({
+    required: false,
+    default: "user",
+    type: String,
+    minlength: 4,
+    maxlength: 50,
+  })
+  role: string;
+
+  @prop({
+    required: false,
+    default: 1,
+    type: Number,
+    min: 1,
+    max: 10,
+  })
+  permissonLevel: number;
+
   public generateAccessToken() {
     return jwt.sign(
       getUserDataForClient(this),

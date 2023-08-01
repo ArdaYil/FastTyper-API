@@ -9,7 +9,7 @@ const getIdPermissionLevel = 10;
 
 router.get(
   "/:id",
-  [auth, admin(getIdPermissionLevel, true)],
+  [auth, admin(getIdPermissionLevel)],
   (req: Request, res: Response) => {
     const id = req.params.id;
     const tag = TagModel.findById(id);

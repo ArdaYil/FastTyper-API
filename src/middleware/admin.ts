@@ -1,7 +1,5 @@
-import MiddlewareFunction from "../types/MiddlewareFunction";
-import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import { User } from "../models/user";
+import MiddlewareFunction from "../types/MiddlewareFunction";
 
 dotenv.config();
 

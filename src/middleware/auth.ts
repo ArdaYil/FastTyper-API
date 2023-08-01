@@ -29,6 +29,9 @@ const auth: MiddlewareFunction = (req, res, next) => {
       return res.status(401).send("Invalid access token");
 
     if (exception instanceof TokenExpiredError)
+      return res.status(401).send("Access token has expired");
+
+    if (exception instanceof NotBeforeError)
       return res.status(401).send("Access token is not valid for use");
   }
 

@@ -5,6 +5,7 @@ import jwt, {
   NotBeforeError,
 } from "jsonwebtoken";
 import dotenv from "dotenv";
+import { User } from "../models/user";
 
 dotenv.config();
 
@@ -15,7 +16,12 @@ const auth: MiddlewareFunction = (req, res, next) => {
     return res.status(401).send("Access denied | Unauthenticated");
 
   try {
-    const payload = jwt.verify(accessToken, process.env.JWT_ACCESS_KEY || "");
+    const user = jwt.verify(
+      accessToken,
+      process.env.JWT_ACCESS_KEY || ""
+    ) as User;
+
+    req.user = user;
 
     next();
   } catch (exception: unknown) {

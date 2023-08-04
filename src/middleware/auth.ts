@@ -23,7 +23,7 @@ const auth: MiddlewareFunction = (req, res, next) => {
 
     req.user = user;
 
-    next();
+    return next();
   } catch (exception: unknown) {
     if (exception instanceof JsonWebTokenError)
       return res.status(401).send("Invalid access token");

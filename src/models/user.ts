@@ -1,4 +1,5 @@
 import typegoose, {
+  getModelForClass,
   modelOptions,
   pre,
   prop,
@@ -10,7 +11,7 @@ import ms from "ms";
 import argon2 from "argon2";
 import jwt from "jsonwebtoken";
 import UserShrinked from "../entities/UserShrinked";
-import generateTag from "../services/TagSystem";
+import generateUniqueTag from "../services/TagSystem";
 import _ from "lodash";
 import dotenv from "dotenv";
 
@@ -77,6 +78,8 @@ const getUserDataForClient = (user: User) =>
     "userTag",
     "friends",
     "tournaments",
+    "permissionLevel",
+    "role",
   ]);
 
 @pre<User>("save", async function () {
@@ -89,7 +92,7 @@ const getUserDataForClient = (user: User) =>
   };
 
   const setTag = async () => {
-    const tag = await generateTag();
+    const tag = await generateUniqueTag();
 
     this.userTag = tag;
   };
@@ -110,7 +113,7 @@ const getUserDataForClient = (user: User) =>
 export class User {
   @prop({
     required: true,
-    minlength: usernameMaxLength,
+    minlength: usernameMinLength,
     maxlength: usernameMaxLength,
     trim: true,
     type: String,
@@ -194,7 +197,6 @@ export class User {
 
   @prop({
     requried: false,
-    default: "",
     minlength: 7,
     maxlength: 15,
     unique: true,
@@ -243,7 +245,7 @@ export class User {
     min: 1,
     max: 10,
   })
-  permissonLevel: number;
+  permissionLevel: number;
 
   public generateAccessToken() {
     return jwt.sign(
@@ -261,7 +263,7 @@ export class User {
   }
 }
 
-const UserModel = typegoose.getModelForClass(User);
+const UserModel = getModelForClass(User);
 
 export const validateUser = (data: UserInputBody) => userSchema.safeParse(data);
 

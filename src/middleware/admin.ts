@@ -11,7 +11,7 @@ const admin: AdminFunction = (permissionLevel) => (req, res, next) => {
   if (!user)
     throw new Error("Authentication must happen before authorization!");
 
-  if (user.permissonLevel < permissionLevel)
+  if (user.permissionLevel < permissionLevel)
     return res.status(403).send("Access denied | Unauthorized");
 
   next();

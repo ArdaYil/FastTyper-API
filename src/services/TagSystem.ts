@@ -10,20 +10,24 @@ const generateUniqueTag = async () => {
   for (let i = 0; i < attempts; i++) {
     const tag = Strings.getRandomString(charactersPerTag);
 
-    if (await isTagUnique(tag)) {
-      const tagDocument = new TagModel({ value: tag });
+    if (!(await isTagUnique(tag))) continue;
 
-      await tagDocument.save();
-
-      return tag;
-    }
+    const tagDocument = await TagModel.create({ value: tag });
+    await tagDocument.save();
+    return tag;
   }
 
   return "";
 };
 
 const isTagUnique = async (tag: string) => {
-  return TagModel.findOne({ value: tag });
+  try {
+    const tagDocument = await TagModel.findOne({ value: tag }).exec();
+
+    return !tagDocument;
+  } catch (exception) {
+    return true;
+  }
 };
 
 export default generateUniqueTag;

@@ -1,6 +1,6 @@
 node_modules
 dist/
 .vs-code
+.vscode/
 coverage/
 .env
-TagSystem.test.ts

@@ -7,9 +7,9 @@ import db from "./startup/db";
 const app = express();
 const port = process.env.PORT || config.get("port");
 
+db();
 middleware(app);
 routes(app);
-db();
 
 const server = app.listen(port, () =>
   console.log(
@@ -17,4 +17,4 @@ const server = app.listen(port, () =>
   )
 );
 
-export default server;
+module.exports = server;

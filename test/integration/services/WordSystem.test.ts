@@ -1,9 +1,9 @@
-import { getRandomWords } from "../../src/services/WordSystem";
-import Arrays from "../../src/util/Arrays";
+import { getRandomWords } from "../../../src/services/WordSystem";
+import Arrays from "../../../src/util/Arrays";
 
 describe("getRandomWords() integration tests", () => {
   it("should return an array of random words", () => {
-    const results = [];
+    const results: Array<Array<string>> = [];
     const amountOfArrays = 10;
     const amountOfWords = 15;
 

@@ -1,4 +1,4 @@
-import Arrays from "../../src/util/Arrays";
+import Arrays from "../../../src/util/Arrays";
 
 const user1 = { name: "john", age: 30 };
 const user2 = { name: "andy", age: 40 };

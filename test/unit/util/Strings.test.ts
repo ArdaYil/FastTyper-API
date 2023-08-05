@@ -1,5 +1,5 @@
-import Arrays from "../../src/util/Arrays";
-import Strings, { CharCase } from "../../src/util/Strings";
+import Arrays from "../../../src/util/Arrays";
+import Strings, { CharCase } from "../../../src/util/Strings";
 
 describe("getRandomCharacter", () => {
   test.each([
@@ -8,7 +8,7 @@ describe("getRandomCharacter", () => {
     ["LOWER", "Random lowercase character"],
     ["RANDOM", "Random randomcase character"],
   ])("Mathematics.getRandomCharacter(%i) should return %i", (charCase, _) => {
-    const characters = [];
+    const characters: Array<string> = [];
     const charactersToRetrieve = 50;
     const ratio = 0.2;
 
@@ -37,7 +37,7 @@ describe("Strings.getRandomString()", () => {
   test.each([[undefined, "UPPER", "LOWER", "RANDOM"]])(
     "Strings.getRandomString(%i) should return a random string with correct case",
     (charCase) => {
-      const results = [];
+      const results: Array<string> = [];
       const amountOfStrings = 10;
       const length = 5;
 

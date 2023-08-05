@@ -1,5 +1,5 @@
-import Mathematics from "../../src/util/Mathematics";
-import Arrays from "../../src/util/Arrays";
+import Mathematics from "../../../src/util/Mathematics";
+import Arrays from "../../../src/util/Arrays";
 
 describe("Mathematics.random() tests", () => {
   test.each([

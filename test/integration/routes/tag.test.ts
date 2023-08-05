@@ -2,7 +2,7 @@ import request from "supertest";
 import TagModel from "../../../src/models/tag";
 import { IncomingMessage, Server, ServerResponse } from "http";
 import UserModel, { User } from "../../../src/models/user";
-import getMockUser from "../util/getMockUser";
+import getMockUser from "../../util/getMockUser";
 import { ObjectId } from "mongodb";
 
 let server: Server<typeof IncomingMessage, typeof ServerResponse>;

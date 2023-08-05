@@ -1,4 +1,4 @@
-import UserModel, { User } from "../../../src/models/user";
+import UserModel, { User } from "../../src/models/user";
 
 interface OptionalUser extends Partial<User> {}
 

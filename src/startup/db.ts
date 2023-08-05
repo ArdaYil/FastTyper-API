@@ -3,6 +3,7 @@ import config from "config";
 
 const db = () => {
   const uri = config.get<string>("db");
+
   mongoose
     .connect(uri)
     .then(() => console.log(`Successfully connected to ${uri}`))

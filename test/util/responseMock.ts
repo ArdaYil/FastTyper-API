@@ -1,4 +1,4 @@
-class RequestClass {
+class ResponseClass {
   public currentStatus?: number;
   public currentMessage: string;
   public data: Array<any> | object;
@@ -33,4 +33,6 @@ class RequestClass {
   }
 }
 
-const getRequest = (obj: object) => new RequestClass();
+const getResponse = (obj?: object) => new ResponseClass();
+
+export default getResponse;

@@ -6,6 +6,9 @@ dotenv.config();
 type AdminFunction = (permissionLevel: number) => MiddlewareFunction;
 
 const admin: AdminFunction = (permissionLevel) => (req, res, next) => {
+  if (permissionLevel <= 1)
+    throw new Error("Permission level has to be greater than 1");
+
   const user = req.user;
 
   if (!user)

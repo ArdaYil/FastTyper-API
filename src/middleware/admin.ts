@@ -7,7 +7,7 @@ const maximumPermission = 10;
 
 const admin: AdminFunction = (permissionLevel) => (req, res, next) => {
   if (
-    permissionLevel < minimumPermission &&
+    permissionLevel < minimumPermission ||
     permissionLevel > maximumPermission
   )
     throw new Error("Permission level has to be between 2 and 10");

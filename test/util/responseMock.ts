@@ -1,4 +1,4 @@
-class ResponseClass {
+class ResponseMock {
   public currentStatus?: number;
   public currentMessage: string;
   public data: Array<any> | object;
@@ -33,6 +33,6 @@ class ResponseClass {
   }
 }
 
-const getResponse = (obj?: object) => new ResponseClass();
+const getResponse = (obj?: object) => new ResponseMock();
 
 export default getResponse;

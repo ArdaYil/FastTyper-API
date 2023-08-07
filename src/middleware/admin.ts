@@ -1,7 +1,4 @@
-import dotenv from "dotenv";
 import MiddlewareFunction from "../types/MiddlewareFunction";
-
-dotenv.config();
 
 type AdminFunction = (permissionLevel: number) => MiddlewareFunction;
 

@@ -4,3 +4,5 @@ class RequestMock {
 }
 
 const getRequest = (obj?: object) => new RequestMock();
+
+export default getRequest;

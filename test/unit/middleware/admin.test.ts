@@ -22,7 +22,7 @@ describe("Authorization", () => {
           getResponse() as any,
           jest.fn()
         )
-      ).toThrow();
+      ).toThrow("Permission level has to be between 2 and 10");
     }
   );
 

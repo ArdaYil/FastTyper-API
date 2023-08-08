@@ -4,7 +4,7 @@ class RequestMock {
   body: any;
   params: any;
   user?: User;
-  private headers: {};
+  private headers: object = {};
 
   constructor(obj?: object, config: object = {}) {
     this.body = obj;

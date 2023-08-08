@@ -250,7 +250,7 @@ export class User {
   public generateAccessToken() {
     return jwt.sign(
       getUserDataForClient(this),
-      process.env.JWT_ACCESS_KEY || "",
+      process.env.JWT_ACCESS_KEY as string,
       { expiresIn: ms("15m") }
     );
   }
@@ -258,7 +258,7 @@ export class User {
   public generateRefreshToken() {
     return jwt.sign(
       getUserDataForClient(this),
-      process.env.JWT_REFRESH_KEY || ""
+      process.env.JWT_REFRESH_KEY as string
     );
   }
 }

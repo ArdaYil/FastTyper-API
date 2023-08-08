@@ -18,7 +18,7 @@ const auth: MiddlewareFunction = (req, res, next) => {
   try {
     const user = jwt.verify(
       accessToken,
-      process.env.JWT_ACCESS_KEY || ""
+      process.env.JWT_ACCESS_KEY as string
     ) as User;
 
     req.user = user;

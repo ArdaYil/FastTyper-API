@@ -25,14 +25,14 @@ const auth: MiddlewareFunction = (req, res, next) => {
 
     return next();
   } catch (exception: unknown) {
-    if (exception instanceof JsonWebTokenError)
-      return res.status(401).send("Invalid access token");
-
     if (exception instanceof TokenExpiredError)
       return res.status(401).send("Access token has expired");
 
     if (exception instanceof NotBeforeError)
       return res.status(401).send("Access token is not valid for use");
+
+    if (exception instanceof JsonWebTokenError)
+      return res.status(401).send("Invalid access token");
   }
 
   return res.status(500).send("Internal server error");

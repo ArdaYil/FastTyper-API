@@ -14,6 +14,7 @@ import UserShrinked from "../entities/UserShrinked";
 import generateUniqueTag from "../services/TagSystem";
 import _ from "lodash";
 import dotenv from "dotenv";
+import Test from "../entities/Test";
 
 dotenv.config();
 
@@ -82,7 +83,7 @@ const getUserDataForClient = (user: User) =>
     "role",
   ]);
 
-@pre<User>("save", async function () {
+@pre<User>("save", async function (next) {
   const hashPassword = async () => {
     if (!this.isModified("password")) return;
 
@@ -100,6 +101,7 @@ const getUserDataForClient = (user: User) =>
   await hashPassword();
   await setTag();
 
+  next();
   return;
 })
 @modelOptions({
@@ -171,14 +173,14 @@ export class User {
     default: [],
     type: Array<typeof Number>,
     validate: {
-      validator: (value: Array<number>) =>
+      validator: (value: Array<Test>) =>
         value.length <= config.get<number>("maxPreviousTests"),
       message: `Amount of previous tests cannot exceed ${config.get(
         "maxPreviousTests"
       )}`,
     },
   })
-  previousTests: Array<number>;
+  previousTests: Array<Test>;
 
   @prop({
     required: false,

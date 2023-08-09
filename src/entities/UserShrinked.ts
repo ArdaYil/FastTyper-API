@@ -1,7 +1,9 @@
+import { ObjectId } from "mongoose";
+
 interface UserShrinked {
   username: string;
   profilePicture: Buffer;
-  id: string;
+  _id: ObjectId;
 }
 
 export default UserShrinked;

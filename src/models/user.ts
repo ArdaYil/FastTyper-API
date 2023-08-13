@@ -15,6 +15,8 @@ import generateUniqueTag from "../services/TagSystem";
 import _ from "lodash";
 import dotenv from "dotenv";
 import Test from "../entities/Test";
+import TournamentPerformance from "../entities/TournamentPerformance";
+import Role from "../types/Role";
 
 dotenv.config();
 
@@ -229,7 +231,7 @@ export class User {
         value.length < config.get<number>("maxTournaments"),
     },
   })
-  tournaments: Array<string>;
+  tournaments: Array<TournamentPerformance>;
 
   @prop({
     required: false,
@@ -238,7 +240,7 @@ export class User {
     minlength: 4,
     maxlength: 50,
   })
-  role: string;
+  role: Role;
 
   @prop({
     required: false,
@@ -248,6 +250,9 @@ export class User {
     max: 10,
   })
   permissionLevel: number;
+
+  @prop({ required: false, default: Buffer.from(""), type: Buffer })
+  profilePicture: Buffer;
 
   public generateAccessToken() {
     return jwt.sign(
